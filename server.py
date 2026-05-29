@@ -1,13 +1,19 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from EmotionDetection.emotion_detection import emotion_detector
  
 app = Flask(__name__)
  
+
+@app.route("/") 
+def render_index_page(): 
+    return render_template('index.html')
+
+
  
 @app.route("/emotionDetector")
 def emotion_detector_route():
     
-    text_to_analyse = request.args.get("textToAnalyse", "")
+    text_to_analyse = request.args.get("textToAnalyze")
  
     
     if not text_to_analyse.strip():
