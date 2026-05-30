@@ -16,15 +16,10 @@ def emotion_detector_route():
     text_to_analyse = request.args.get("textToAnalyze")
  
     
-    if not text_to_analyse.strip():
-        return "Invalid text! Please try again.", 400
  
     result = emotion_detector(text_to_analyse)
  
     
-    if result["dominant_emotion"] is None:
-        return "Invalid text! Please try again.", 400
- 
     anger   = result["anger"]
     disgust = result["disgust"]
     fear    = result["fear"]
@@ -32,8 +27,12 @@ def emotion_detector_route():
     sadness = result["sadness"]
     dominant = result["dominant_emotion"]
  
+    if result["dominant_emotion"] is None:
+        return "Invalid text! Please try again.", 400
+ 
     
-    output = (
+     
+    return  (
         f"For the given statement, the system response is "
         f"'anger': {anger}, "
         f"'disgust': {disgust}, "
@@ -42,8 +41,7 @@ def emotion_detector_route():
         f"'sadness': {sadness}. "
         f"The dominant emotion is {dominant}."
     )
- 
-    return output
+
  
  
 if __name__ == "__main__":

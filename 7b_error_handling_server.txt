@@ -16,8 +16,6 @@ def emotion_detector_route():
     text_to_analyse = request.args.get("textToAnalyze")
  
     
-    if not text_to_analyse.strip():
-        return "Invalid text! Please try again.", 400
  
     result = emotion_detector(text_to_analyse)
  
